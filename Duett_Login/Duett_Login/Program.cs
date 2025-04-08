@@ -6,11 +6,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurações de banco InMemory
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("LoginDb"));
 
-// Configurações de autenticação JWT
 var key = Encoding.ASCII.GetBytes("me-contrata-por-favor");
 builder.Services.AddAuthentication(options =>
 {
