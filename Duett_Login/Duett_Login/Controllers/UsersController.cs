@@ -9,7 +9,6 @@ namespace Duett_Login.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Administrador")]
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;

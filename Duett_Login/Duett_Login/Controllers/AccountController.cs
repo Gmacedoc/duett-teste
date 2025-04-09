@@ -9,7 +9,6 @@ namespace Duett_Login.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class AccountController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -23,12 +22,7 @@ namespace Duett_Login.Controllers
         [HttpPut("trocar-senha")]
         public IActionResult TrocaSenhaLogado(ChangePasswordDto dto)
         {
-            var userId = User.FindFirst("UserId")?.Value;
-
-            if (userId == null)
-                return Unauthorized();
-
-            var user = _context.Users.FirstOrDefault(u => u.Id.ToString() == userId);
+            var user = _context.Users.FirstOrDefault(u => u.Email == dto.Email);
 
             if (user == null)
                 return NotFound("Usuário não encontrado.");

@@ -82,11 +82,11 @@ namespace Duett_Login.Controllers
 
             var claims = new[]
             {
-            new Claim(ClaimTypes.Name, user.Nome),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.Perfil),
-            new Claim("UserId", user.Id.ToString())
-        };
+                new Claim("nome", user.Nome),
+                new Claim("email", user.Email),
+                new Claim(ClaimTypes.Role, user.Perfil),
+                new Claim("UserId", user.Id.ToString())
+            };
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
