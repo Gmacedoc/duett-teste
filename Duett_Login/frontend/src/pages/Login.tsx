@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/auth-context";
 import {
   Box,
@@ -7,7 +7,6 @@ import {
   Button,
   Typography,
   Alert,
-  Paper,
 } from "@mui/material";
 
 const apiUrl = import.meta.env.VITE_APP_API;
@@ -47,18 +46,31 @@ const Login = () => {
 
   return (
     <Box
-      component={Paper}
-      elevation={3}
-      maxWidth={400}
-      mx="auto"
-      mt={10}
-      p={4}
-      borderRadius={2}
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "#f3f4f6",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        px: 2,
+      }}
     >
-      <Typography variant="h5" gutterBottom>
-        Login
-      </Typography>
-      <form onSubmit={handleSubmit}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          width: "100%",
+          maxWidth: 400,
+          bgcolor: "white",
+          p: 4,
+          borderRadius: 2,
+          boxShadow: 3,
+        }}
+      >
+        <Typography variant="h5" fontWeight="bold" gutterBottom textAlign="center">
+          Login
+        </Typography>
+        
         <TextField
           label="Email"
           type="email"
@@ -77,11 +89,13 @@ const Login = () => {
           margin="normal"
           required
         />
+        
         {error && (
           <Alert severity="error" sx={{ mt: 1 }}>
             {error}
           </Alert>
         )}
+        
         <Button
           type="submit"
           variant="contained"
@@ -91,14 +105,21 @@ const Login = () => {
         >
           Entrar
         </Button>
-        <Box mt={2} textAlign="center">
-          <Link to="/register" style={{ textDecoration: "none", color: "#1976d2" }}>
-            Cadastrar-se
-          </Link>
-        </Box>
-      </form>
+        
+        <Button
+          type="button"
+          variant="contained"
+          color="secondary"
+          fullWidth
+          sx={{ mt: 2 }}
+          onClick={() => navigate("/register")}
+        >
+          Cadastrar-se
+        </Button>
+      </Box>
     </Box>
   );
+  
 };
 
 export default Login;

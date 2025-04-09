@@ -12,6 +12,7 @@ function App() {
   return (
     <Router>
       <Routes>
+
       <Route
         path="/home"
         element={
@@ -21,8 +22,17 @@ function App() {
         }
       />
       <Route path="/" element={<Login />} />
+
       <Route path="/register" element={<Register />} />
-      <Route path="/changePassword" element={<ChangePassword />} />
+
+      <Route path="/changePassword" 
+        element={
+          <ProtectedRoute >
+              <ChangePassword />
+          </ProtectedRoute>
+        } 
+      />
+      
       <Route
         path="/admin"
         element={

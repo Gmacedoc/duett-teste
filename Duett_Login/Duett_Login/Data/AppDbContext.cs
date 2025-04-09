@@ -22,7 +22,7 @@ namespace Duett_Login.Data
                 CPF = "00000000000",
                 Perfil = "Administrador"
             };
-            admin.PasswordHash = hasher.HashPassword(admin, "1901");
+            admin.PasswordHash = hasher.HashPassword(admin, "0000");
 
             var user = new User
             {
@@ -32,7 +32,7 @@ namespace Duett_Login.Data
                 CPF = "11111111111",
                 Perfil = "Usuario"
             };
-            user.PasswordHash = hasher.HashPassword(user, "1509");
+            user.PasswordHash = hasher.HashPassword(user, "1111");
 
             modelBuilder.Entity<User>().HasData(admin, user);
         }

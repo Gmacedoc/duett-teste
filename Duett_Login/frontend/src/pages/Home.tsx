@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/auth-context";
+import { Box, Button, Typography } from "@mui/material";
 
 const Home: React.FC = () => {
   const { user, logout } = useAuth();
@@ -12,54 +13,81 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 pt-20">
-      <header className="top-0 left-0 p-4" style={{}}>
-        <div className="container mx-auto flexitems-center" style={{display:'flex', alignItems: 'center', flexDirection: 'column'}}>
-          <h1 className="text-xl font-bold text-gray-800">Duett Login</h1>
-            <button
-             onClick={handleLogout}
-             style={{marginLeft: '20px'}}
-             className="text-red-500 hover:underline font-medium">
-                 Sair
-            </button>
-        </div>
-      </header>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "#f3f4f6",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        pt: 8,
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: 400,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          px: 2,
+          pb: 2,
+        }}
+      >
+        <Typography variant="h5" fontWeight="bold" color="text.primary">
+          Duett Login
+        </Typography>
+        <Button
+          onClick={handleLogout}
+          variant="text"
+          color="error"
+          sx={{ fontWeight: "medium" }}
+        >
+          Sair
+        </Button>
+      </Box>
+  
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          textAlign: "center",
+          mb: 4,
+        }}
+      >
+        <Typography variant="h4" fontWeight="bold" color="text.primary">
+          Hola Mundo, {user?.nome || "usuário"}!
+        </Typography>
+  
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2, marginTop: '100px' }}>
+          {user?.role === "Administrador" && (
+            <Button
+              onClick={() => navigate("/admin")}
+              variant="text"
+              color="primary"
+              sx={{ fontWeight: "medium" }}
+            >
+              Lista de Usuários
+            </Button>
+          )}
 
-      
-
-      <main style={{flexDirection: 'column'}} className="flex items-center justify-center h-[calc(50vh-80px)]">
-      
-        <h1 className="text-4xl font-bold text-gray-800">
-          Bem-vindo, {user?.nome || "usuário"}!
-        </h1>
-
-        <nav style={{flexDirection: 'column'}} className="flex items-center gap-6">
-            <Link to="/home" style={{cursor: 'pointer'}} className="text-gray-700 hover:text-blue-600 font-medium">
-              Home
-            </Link>
-
-            {user?.role === "Administrador" && (
-              <Link
-                style={{cursor: 'pointer'}}
-                to="/admin"
-                className="text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Lista de Usuários
-              </Link>
-            )}
-            
-            <Link
-                style={{cursor: 'pointer'}}
-                to="/changePassword"
-                className="text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Trocar senha
-              </Link>
-           
-          </nav>
-      </main>
-    </div>
+          <Button
+            onClick={() => navigate("/changePassword")}
+            variant="text"
+            color="primary"
+            sx={{ fontWeight: "medium" }}
+          >
+            Trocar senha
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
+  
 };
 
 export default Home;

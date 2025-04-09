@@ -4,9 +4,11 @@ import {
   Typography,
   IconButton,
   CircularProgress,
+  Button,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useNavigate } from "react-router-dom";
 
 type Usuario = {
   id: string;
@@ -19,7 +21,7 @@ type Usuario = {
 const ListaUsuarios: React.FC = () => {
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   const stored = localStorage.getItem("user");
   const token = stored ? JSON.parse(stored).token : "";
   const emailLogado = stored ? JSON.parse(stored).email : "";
@@ -89,9 +91,30 @@ const ListaUsuarios: React.FC = () => {
             columns={columns}
             getRowId={(row) => row.id}
             disableRowSelectionOnClick
+            sx={{
+              '& .MuiDataGrid-columnHeaders': {
+                backgroundColor: '#1976d2',
+              },
+              '& .MuiDataGrid-cell': {
+                fontSize: '14px',
+              },
+              '& .MuiDataGrid-footerContainer': {
+                backgroundColor: '#f5f5f5',
+              },
+            }}
           />
         </Box>
       )}
+      <Button
+          type="button" 
+          variant="contained"
+          color="secondary"
+          fullWidth
+          sx={{ mt: 2 }}
+          onClick={() => navigate("/home")} 
+        >
+          Voltar
+        </Button>
     </Box>
   );
 };

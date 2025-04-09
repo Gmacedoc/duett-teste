@@ -8,6 +8,7 @@ import {
   Typography,
   InputLabel,
   FormControl,
+  Alert,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { formatCpf } from "../Utils/Utils";
@@ -17,6 +18,9 @@ const apiUrl = import.meta.env.VITE_APP_API;
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
+  const [mensagem, setMensagem] = useState("");
+  const [erro, setErro] = useState(false);
+
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -45,17 +49,18 @@ const Register: React.FC = () => {
           },
           body: bodyJson,
         });
-  
+        debugger
         if (!response.ok) {
           const text = await response.text();
-          throw new Error(text || "Erro ao fazer login");
+          setMensagem(text || "Erro ao fazer login");
+          setErro(true)
+          return
         }
     
         navigate("/home"); 
       } catch (err: any) {
 
       }
-    navigate("/home");
   };
 
   return (
@@ -175,6 +180,11 @@ const Register: React.FC = () => {
         >
           Voltar
         </Button>
+        {mensagem && (
+          <Alert severity={erro ? "error" : "success"} sx={{ mt: 2 }}>
+            {mensagem}
+          </Alert>
+        )}
       </Box>
     </Box>
   );

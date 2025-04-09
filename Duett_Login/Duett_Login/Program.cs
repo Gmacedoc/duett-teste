@@ -10,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("LoginDb"));
 
-var key = Encoding.ASCII.GetBytes("me-contrata-por-favor-esse-token-tem-que-ser-maior-que-eu-imaginava");
+var key = Encoding.ASCII.GetBytes("esse-token-tem-que-ser-maior-que-eu-imaginava");
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
