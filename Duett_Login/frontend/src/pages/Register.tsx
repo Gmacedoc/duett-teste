@@ -67,7 +67,6 @@ const Register: React.FC = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#f3f4f6",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
