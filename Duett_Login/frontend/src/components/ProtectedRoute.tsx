@@ -9,13 +9,13 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) => {
   const { isAuthenticated, user } = useAuth();
-
   if (!isAuthenticated) {
+    
     return <Navigate to="/" />;
   }
 
   if (requiredRole && user?.role !== requiredRole) {
-    return <Navigate to="/" />;
+    return <Navigate to="/home" />;
   }
 
   return children;
